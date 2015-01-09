@@ -2,7 +2,6 @@ var dictionary = {};
 var prefix =  'drive.google.com/viewerng/viewer?url=';
 var suffix = '&embedded=true';
 
-
 chrome.webRequest.onBeforeRequest.addListener(function(details) {
 
     var lastUrl = dictionary[details.tabId];
@@ -24,3 +23,15 @@ chrome.webRequest.onBeforeRequest.addListener(function(details) {
 }, {
     urls: ["<all_urls>"], types : ["main_frame"]
 }, ['blocking']);
+
+
+chrome.webNavigation.onCompleted.addListener(function(details){
+
+	if(details.url.indexOf(prefix) >= 0 && details.url.indexOf(suffix) >= 0)
+	{
+		chrome.extension.getBackgroundPage().console.log("foo");
+		chrome.tabs.insertCSS(details.tabId, {file: "./updates.css"})
+		chrome.tabs.executeScript(details.tabId, {file: "./jquery.js"})
+		chrome.tabs.executeScript(details.tabId, {file: "./injection.js"})
+	}
+})

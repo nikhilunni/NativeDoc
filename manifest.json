@@ -3,12 +3,13 @@
     "version": "2.1",
     "manifest_version" : 2,
     "background" : {
-	"scripts" : ["event.js"],
+	"scripts" : ["event.js", "jquery.js"],
 	"persistent" : true
     },
     "description": "Viewer for docx and pptx",
     "permissions": ["webRequest",
             "webRequestBlocking",
+            "webNavigation",
 		    "tabs",
 		    "*://*/*"]
 }
