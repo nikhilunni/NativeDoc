@@ -9,5 +9,6 @@
     "description": "Viewer for docx and pptx",
     "permissions": ["webRequest",
             "webRequestBlocking",
+		    "tabs",
 		    "*://*/*"]
 }
