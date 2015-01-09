@@ -1,18 +1,26 @@
 var dictionary = {};
-var prefix =  'docs.google.com/viewer?url=';
+var prefix =  'drive.google.com/viewerng/viewer?url=';
+var suffix = '&embedded=true';
 
 
 chrome.webRequest.onBeforeRequest.addListener(function(details) {
-    var oldUrl = null;
-    chrome.tabs.get(details.tabId,
-                    function(tab) {
-                        oldUrl = tab.url;
-                        chrome.extension.getBackgroundPage().console.log(oldUrl);                        
-                    });
-    chrome.extension.getBackgroundPage().console.log("NOT TAB");
-    return {redirectUrl: 'http://docs.google.com/viewer?url='+details.url+'&embedded=false'};
 
+    var lastUrl = dictionary[details.tabId];
+    var result;
+    dictionary[details.tabId] = details.url;
+    if(details.url.match(/\.(doc|ppt)x?$/)) {
+        if(lastUrl == 'http://'+prefix+details.url+suffix ||
+           lastUrl == 'https://'+prefix+details.url+suffix) {
+            return {cancel : false};
+        }
+        else {
+            return {redirectUrl: 'https://'+prefix+details.url+suffix};
+        }
+    }
+    else {
+        return {cancel : false};
+    }
     
 }, {
-    urls: ['*://*/*.docx', '*://*/*.doc', '*://*/*.pptx', '*://*/*.ppt']
+    urls: ["<all_urls>"], types : ["main_frame"]
 }, ['blocking']);
