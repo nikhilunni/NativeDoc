@@ -4,9 +4,10 @@
     "manifest_version" : 2,
     "background" : {
 	"scripts" : ["event.js"],
-	"persistent" : false
+	"persistent" : true
     },
     "description": "Viewer for docx and pptx",
-    "permissions": ["declarativeWebRequest",
+    "permissions": ["webRequest",
+            "webRequestBlocking",
 		    "*://*/*"]
 }
