@@ -6,6 +6,7 @@
 	"scripts" : ["event.js", "jquery.js"],
 	"persistent" : true
     },
+    "icons" : {"256" : "nativedoc.ico"},
     "description": "Viewer for docx and pptx",
     "permissions": ["webRequest",
             "webRequestBlocking",
