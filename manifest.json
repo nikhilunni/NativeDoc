@@ -11,5 +11,6 @@
             "webRequestBlocking",
             "webNavigation",
 		    "tabs",
-		    "*://*/*"]
+		    "*://*/*"],
+    "web_accessible_resources": ["dl.jpg", "save.jpg"]
 }
