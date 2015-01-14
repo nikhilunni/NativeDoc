@@ -29,9 +29,22 @@ chrome.webNavigation.onCompleted.addListener(function(details){
 
 	if(details.url.indexOf(prefix) >= 0 && details.url.indexOf(suffix) >= 0)
 	{
-		chrome.extension.getBackgroundPage().console.log("foo");
-		chrome.tabs.insertCSS(details.tabId, {file: "./updates.css"})
-		chrome.tabs.executeScript(details.tabId, {file: "./jquery.js"})
-		chrome.tabs.executeScript(details.tabId, {file: "./injection.js"})
+	    chrome.tabs.insertCSS(details.tabId, {file: "./updates.css"});
+	    chrome.tabs.executeScript(details.tabId, {file: "./jquery.js"});
+	    chrome.tabs.executeScript(details.tabId, {file: "./injection.js"});
 	}
-})
+});
+
+
+chrome.webRequest.onHeadersReceived.addListener(
+      function(details) {
+          //Intercept all headers with BLOB url, and feed it to our js scripts
+          if(details.url.match(/drive\.google\.com\/viewerng\/img\?/)) {
+              var url = details.url.substr(0,details.url.length-1);
+              chrome.tabs.executeScript(details.tabId,
+                                        {code: ('var nativeDoc_blob="'+url+'";')});
+          }
+          return {responseHeaders: details.responseHeaders};
+      },
+      {urls: ["<all_urls>"]},
+      ["blocking", "responseHeaders"]);

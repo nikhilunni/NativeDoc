@@ -56,8 +56,13 @@
     background-color: rgb(78, 108, 165);
 }
 
+.visible {display: none;}
+
 @media print {
 	div {display: none;}
 	p {display: none;}
-	img{ display: visible}
+	img{ display: none;}
+	.visible{ display: block;}
+	.invisible{ display: none;}
+	#shadow-root{ display: none;}
 }
