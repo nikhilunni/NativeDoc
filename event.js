@@ -9,7 +9,7 @@ chrome.webRequest.onBeforeRequest.addListener(function(details) {
     dictionary[details.tabId] = details.url;
     if(details.url.match(/\.(doc|ppt)x?$/)) {
         if(lastUrl == 'http://'+prefix+details.url+suffix ||
-           lastUrl == 'https://'+prefix+details.url+suffix) {
+            lastUrl == 'https://'+prefix+details.url+suffix) {
             return {cancel : false};
         }
         else {
@@ -30,8 +30,19 @@ chrome.webNavigation.onCompleted.addListener(function(details){
 	if(details.url.indexOf(prefix) >= 0 && details.url.indexOf(suffix) >= 0)
 	{
 	    chrome.tabs.insertCSS(details.tabId, {file: "./updates.css"});
+
+      if(details.url.match(/\.pptx?&embedded=true$/))
+      {
+          chrome.tabs.insertCSS(details.tabId, {file: "./landscape.css"});
+      }
+      else
+      {
+          chrome.tabs.insertCSS(details.tabId, {file: "./portrait.css"});
+      }
+
 	    chrome.tabs.executeScript(details.tabId, {file: "./jquery.js"});
 	    chrome.tabs.executeScript(details.tabId, {file: "./injection.js"});
+
 	}
 });
 
