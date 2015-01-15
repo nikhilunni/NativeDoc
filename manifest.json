@@ -1,6 +1,6 @@
 {
     "name": "NativeDoc",
-    "version": "0.9",
+    "version": "1.0",
     "manifest_version" : 2,
     "background" : {
 	"scripts" : ["event.js", "jquery.js"],
@@ -20,5 +20,5 @@
             "webNavigation",
 		    "tabs",
 		    "*://*/*"],
-    "web_accessible_resources": ["dl.jpg", "save.jpg"]
+    "web_accessible_resources": ["dl.jpg", "printer.png"]
 }

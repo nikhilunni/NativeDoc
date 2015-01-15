@@ -1,15 +1,27 @@
 originalUrl = window.location.href;
+history.replaceState({}, "NativeDoc", "/nativeDoc");
+
+$(document).keydown(function(event) {
+    // If Control or Command key is pressed and the R key is pressed
+    // run refresh function. 82 is the key code for R.
+    if((event.ctrlKey || event.metaKey) && event.which == 82) {
+        // Refresh Function
+        console.log(originalUrl);
+        window.location.href = originalUrl;
+        event.preventDefault();
+    };
+});
+
 
 var index = window.location.href.indexOf("?url=");
 url = window.location.href.substring(index+5, window.location.href.length-14);
-history.replaceState({}, "NativeDoc", "/nativeDoc");
 
 $(".ndfHFb-c4YZDc-aSZUA-Wrql6b").remove();
 dl_url = chrome.extension.getURL('dl.jpg');
-print_url = chrome.extension.getURL('save.jpg')
+print_url = chrome.extension.getURL('printer.png')
 
 // <div id='save' style='float:left' class='btn-l'><img class='icon' src='"+save_url+"'></div>
-$("body").append("<div class='toolbar'><div id='print' style='float:left' class='btn-l'><img class='icon' src='"
+$("body").append("<div class='toolbar'><div id='print' style='float:left' class='btn-l'><img class='icon2' src='"
     +print_url+"'></div><div id='download' style='float:right' class='btn-r'><img class='icon' src='"
     +dl_url+"'></div></div>")
 
@@ -17,7 +29,6 @@ $("body").append("<div class='toolbar'><div id='print' style='float:left' class=
 
 
 $(document).ready(function() {
-    
 
     $("body").wrap("<div class='invisible'></div>");
     $('.invisible').after("<div class='visible'></div>");
@@ -37,7 +48,6 @@ $(document).ready(function() {
             pages.push($(this));
             count++;
             if(count >= numPages) {
-                console.log("DONE!");
                 pages.sort(function(a,b) {
                     return a.attr("page") - b.attr("page");
                 });
@@ -63,16 +73,6 @@ $(document).ready(function() {
         if((event.ctrlKey || event.metaKey) && event.which == 83) {
             // Save Function
             $('#download').click();
-            event.preventDefault();
-        };
-    });
-
-    $(document).keydown(function(event) {
-        // If Control or Command key is pressed and the R key is pressed
-        // run refresh function. 82 is the key code for R.
-        if((event.ctrlKey || event.metaKey) && event.which == 82) {
-            // Refresh Function
-            window.location.href = originalUrl;
             event.preventDefault();
         };
     });
