@@ -1,4 +1,6 @@
 originalUrl = window.location.href;
+var index = window.location.href.indexOf("?url=");
+url = window.location.href.substring(index+5, window.location.href.length-14);
 history.replaceState({}, "NativeDoc", "/nativeDoc");
 
 $(document).keydown(function(event) {
@@ -11,10 +13,6 @@ $(document).keydown(function(event) {
         event.preventDefault();
     };
 });
-
-
-var index = window.location.href.indexOf("?url=");
-url = window.location.href.substring(index+5, window.location.href.length-14);
 
 $(".ndfHFb-c4YZDc-aSZUA-Wrql6b").remove();
 dl_url = chrome.extension.getURL('dl.jpg');
