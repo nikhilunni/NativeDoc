@@ -33,7 +33,7 @@ $(document).ready(function() {
 
 
     //Extract total page numbers from the alt of the first page
-    var firstBLOBAlt = $('.ndfHFb-c4YZDc-cYSp0e-DARUcf-RJLb9c').attr('alt');
+    var firstBLOBAlt = $('h2.ndfHFb-c4YZDc-cYSp0e-DARUcf-Df1ZY-tJHJj').first().text();
     var numberIndex = firstBLOBAlt.indexOf("of ");
     var numPages = parseInt(firstBLOBAlt.substr(numberIndex + 3, firstBLOBAlt.length-numberIndex-3));
 
