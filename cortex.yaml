@@ -13,7 +13,7 @@ info:
   x-pagerduty-service: PM66VXY 
   x-cortex-tag: drafts
   x-group-id: 00g1gaui8cbR3KKAy4x6
-  x-github-repository: nikhilunni/HaskellBoy
+  x-github-repository: nikhilunni/NativeDoc
   x-cortex-link:
     - name: 5xx Runbook
       type: RUNBOOK
