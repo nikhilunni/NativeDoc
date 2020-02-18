@@ -7,7 +7,7 @@ info:
   contact:
     email: test@gmail.com
   version: '1.0'
-  title: Drafts TEST
+  title: Drafts
   x-slack-webhook:
     - cortex-demo
   x-pagerduty-service: PM66VXY 
